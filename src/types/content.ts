@@ -19,3 +19,18 @@ export type SkillGroup = {
   category: string;
   items: string[];
 };
+
+export type CareerItem = {
+  company: string;
+  role: string;
+  period: string;
+  description: string;
+  stack?: string[];
+};
+
+export type EducationItem = {
+  school: string;
+  degree: string;
+  period: string;
+  note?: string;
+};

@@ -43,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning className={pretendard.variable}>
-      <body className="min-h-screen bg-background font-sans antialiased flex flex-col">
+      <body suppressHydrationWarning className="min-h-screen bg-background font-sans antialiased flex flex-col">
         <Providers>
           <SiteHeader />
           <main className="flex-1">{children}</main>
