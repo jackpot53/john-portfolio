@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { SiteHeader } from "@/components/site-header";
@@ -44,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning className={pretendard.variable}>
       <body suppressHydrationWarning className="min-h-screen bg-background font-sans antialiased flex flex-col">
+        <Script src="/theme-init.js" strategy="beforeInteractive" />
         <Providers>
           <SiteHeader />
           <main className="flex-1">{children}</main>

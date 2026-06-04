@@ -45,6 +45,30 @@ CONTACT_TO_EMAIL=your@email.com    # 문의 수신 이메일
 - `src/content/projects.ts` — 프로젝트 목록
 - `src/content/skills.ts` — 기술 스택 목록
 
+## Database (Supabase + Drizzle ORM)
+
+DB 관련 작업 시 **반드시** `docs/db/` 폴더를 먼저 확인하세요.
+
+- `docs/db/erd.md` — Mermaid ERD 및 전체 테이블 정의 (컬럼·타입·제약 포함)
+
+### 핵심 규칙
+
+- 테이블 스키마 변경 시 `docs/db/erd.md`도 함께 업데이트할 것
+- Drizzle 스키마는 `src/lib/db/schema.ts`, DB 클라이언트는 `src/lib/db/index.ts`
+- 새 테이블에는 **반드시 RLS를 활성화**하고 최소 권한 정책을 명시할 것
+  - 포트폴리오 공개 데이터 → `FOR SELECT USING (true)`
+  - 쓰기는 서비스 롤 전용 (anon 키로 INSERT/UPDATE/DELETE 불가)
+- 마이그레이션은 Supabase MCP `apply_migration` 또는 `drizzle-kit push` 사용
+
+### 현재 테이블 (public 스키마)
+
+| 테이블 | 설명 | RLS |
+|--------|------|-----|
+| `careers` | 경력 항목 (`ended_at` NULL = 현재 재직) | ✅ |
+| `career_stacks` | 경력별 기술 스택 (careers FK) | ✅ |
+| `educations` | 학력 항목 (`ended_at` NULL = 재학 중) | ✅ |
+| `contacts` | 문의 폼 제출 내역 | — |
+
 ## Structure
 
 ```
